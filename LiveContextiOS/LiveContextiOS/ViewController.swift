@@ -30,18 +30,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var searchQuery = ""
     
-    var articleTitles = ["This is happening in some place, here is some sample text.",
-                         "This is happening in some place, here is some sample text.",
-                         "This is happening in some place, here is some sample text.",
-                         "This is happening in some place, here is some sample text."]
-    var articleDescriptions = ["This is the description of the news.",
-                         "This is the description of the news.",
-                         "This is the description of the news.",
-                         "This is the description of the news."]
-    var articleImageNames = ["img",
-                               "img",
-                               "img",
-                               "img"]
+    var articleTitles = ["Start Speaking to See Articles Related to your stream!"]
+    var articleDescriptions = ["Articles will appear automatically"]
+    var articleImageNames = ["placeholder"]
     
     var selectedNewsIndex = 0
     var currentNewsIndex = 0
@@ -108,8 +99,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         indicator.frame = CGRect(x: (view.frame.size.width / 2) - 50, y: newsCollectionView.frame.maxY, width: 100, height: 30)
         indicator.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        indicator.alpha = 0.6
+        indicator.alpha = 0.0
         indicator.numberOfPages = articleTitles.count
+        indicator.isHidden = true
         view.addSubview(indicator)
         
         detectedTxt.isHidden = true
@@ -125,13 +117,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 //        recorder.delegate = self
         
         // DEMO ADDING A CELL
-        let when = DispatchTime.now() + 5
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            // Your code with delay
-            
-            self.addArticle(title: "New Title", description: "New Description", imgName: "img")
-            
-        }
+//        let when = DispatchTime.now() + 5
+//        DispatchQueue.main.asyncAfter(deadline: when) {
+//
+//            self.addArticle(title: "New Title", description: "New Description", imgName: "img")
+//
+//        }
 
     }
     
@@ -701,6 +692,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     
                     if let articleTitle = self.articleTitles.first, let articleDscpt = self.articleDescriptions.first, let articleImg = self.articleImageNames.first{
                         self.addArticle(title: articleTitle, description: articleDscpt, imgName: articleImg)
+                        
+                        self.indicator.numberOfPages = self.articleTitles.count
+                        
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.indicator.isHidden = false
+                            self.indicator.alpha = 0.6
+                        })
                     }
                     
                     print("titles", self.articleTitles)
