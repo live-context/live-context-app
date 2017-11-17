@@ -699,11 +699,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     self.articleDescriptions = json["articles"].arrayValue.map({$0["description"].stringValue})
                     self.articleImageNames =  json["articles"].arrayValue.map({$0["urlToImage"].stringValue})
                     
-                    self.addArticle(title: self.articleTitles[0], description: self.articleDescriptions[0], imgName: self.articleImageNames[0])
+                    if let articleTitle = self.articleTitles.first, let articleDscpt = self.articleDescriptions.first, let articleImg = self.articleImageNames.first{
+                        self.addArticle(title: articleTitle, description: articleDscpt, imgName: articleImg)
+                    }
                     
-                    print(self.articleTitles)
-                    print(self.articleDescriptions)
-                    print(self.articleImageNames)
+                    print("titles", self.articleTitles)
+                    print("dscpts", self.articleDescriptions)
+                    print("images",self.articleImageNames)
                     //                    for article in articles {
                     //                        self.articleTitles.append(articl)
                     //                    }
