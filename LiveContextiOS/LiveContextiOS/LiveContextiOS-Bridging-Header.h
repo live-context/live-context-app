@@ -14,5 +14,7 @@
 
 #import <SCRecorder/SCRecorder.h>
 
+#import <LFliveKit.h>
+
 
 #endif /* LiveContextiOS_Bridging_Header_h */

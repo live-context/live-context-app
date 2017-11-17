@@ -124,6 +124,7 @@
                                         <size key="customSize" width="335" height="80"/>
                                         <connections>
                                             <outlet property="backView" destination="8HX-HY-CdE" id="VOU-fs-Skc"/>
+                                            <outlet property="blueImg" destination="9FM-8g-DmI" id="Vfi-DZ-jfd"/>
                                             <outlet property="btn" destination="wQq-EK-Rkk" id="ye1-bB-Rnw"/>
                                             <outlet property="btnBack" destination="MbR-Uc-40E" id="O0l-7S-rJP"/>
                                             <outlet property="descrip" destination="p1w-X0-ViR" id="Piz-57-eUt"/>

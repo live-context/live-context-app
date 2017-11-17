@@ -8,5 +8,5 @@ target 'LiveContextiOS' do
 	pod 'FBSDKLoginKit'
     
     pod 'SCRecorder'
-
+    pod 'LFLiveKit'
 end

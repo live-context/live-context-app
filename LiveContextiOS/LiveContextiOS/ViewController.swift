@@ -11,8 +11,9 @@ import AVFoundation
 import SCRecorder
 import FBSDKLoginKit
 import FBSDKCoreKit
+import LFLiveKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, SFSpeechRecognizerDelegate, FBSDKLoginButtonDelegate {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, SFSpeechRecognizerDelegate, FBSDKLoginButtonDelegate, LFLiveSessionDelegate {
     
 
     @IBOutlet weak var goLiveBack: UIView!
@@ -57,6 +58,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         return pc
     }()
     
+    lazy var session: LFLiveSession = {
+        
+        let audioConfiguration = LFLiveAudioConfiguration.default()
+        let videoConfiguration = LFLiveVideoConfiguration.defaultConfiguration(for: LFLiveVideoQuality.default, outputImageOrientation: .portrait)
+    
+        let session = LFLiveSession(audioConfiguration: audioConfiguration, videoConfiguration: videoConfiguration)
+        
+        return session!
+    }()
+    
     // Speech Recognition
     let audioEngine: AVAudioEngine = AVAudioEngine()
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
@@ -64,9 +75,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var recognitionTask: SFSpeechRecognitionTask = SFSpeechRecognitionTask()
     
     // Camera
-    let session = SCRecordSession()
-    let recorder = SCRecorder()
-    let player = SCPlayer()
+//    let session = SCRecordSession()
+//    let recorder = SCRecorder()
+//    let player = SCPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,6 +85,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         profileImgVIew.image = UIImage(named: "face")
         personName.text = "Robert Hernandez"
+        
+        session.delegate = self
+        session.preView = self.view
+        session.captureDevicePosition = .front
+        
+        self.requestAccessForAudio()
+        self.requestAccessForVideo()
         
         newsCollectionView.delegate = self
         newsCollectionView.dataSource = self
@@ -91,14 +109,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         indicator.numberOfPages = articleTitles.count
         view.addSubview(indicator)
         
-        if (!recorder.startRunning()) {
-            debugPrint("Recorder error: ", recorder.error as Any)
-        }
+        detectedTxt.isHidden = true
+        playView.isHidden = true
         
-        recorder.session = session
-        recorder.device = AVCaptureDevice.Position.front
-        recorder.videoConfiguration.size = CGSize(width: view.frame.size.width, height: view.frame.size.height)
-        recorder.delegate = self
+//        if (!recorder.startRunning()) {
+//            debugPrint("Recorder error: ", recorder.error as Any)
+//        }
+//
+//        recorder.session = session
+//        recorder.device = AVCaptureDevice.Position.front
+//        recorder.videoConfiguration.size = CGSize(width: view.frame.size.width, height: view.frame.size.height)
+//        recorder.delegate = self
         
         // DEMO ADDING A CELL
         let when = DispatchTime.now() + 5
@@ -113,20 +134,130 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     override func viewDidLayoutSubviews() {
         
-        recorder.previewView = previewView
+//        recorder.previewView = previewView
+//
+//        player.setItemBy(session.assetRepresentingSegments())
+//        let playerLayer = AVPlayerLayer(player: player)
+//        let bounds = playView.bounds
+//        playerLayer.frame = bounds
+//        playerLayer.addSublayer(imglayer)
+//        playView.layer.addSublayer(playerLayer)
         
-        player.setItemBy(session.assetRepresentingSegments())
-        let playerLayer = AVPlayerLayer(player: player)
-        let bounds = playView.bounds
-        playerLayer.frame = bounds
-        playerLayer.addSublayer(imglayer)
-        playView.layer.addSublayer(playerLayer)
+    }
+    
+    func requestAccessForVideo() -> Void {
+        
+        let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
+        
+        switch status  {
+            
+        case AVAuthorizationStatus.notDetermined:
+            
+            AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted) in
+                
+                if(granted){
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.session.running = true
+                        
+                    }
+                    
+                }
+                
+            })
+            
+            break;
+            
+        case AVAuthorizationStatus.authorized:
+            
+            session.running = true;
+            
+            break
+            
+        case AVAuthorizationStatus.denied: break
+            
+        case AVAuthorizationStatus.restricted:break;
+            
+        default:
+            
+            break;
+            
+        }
+        
+    }
+    
+    func requestAccessForAudio() -> Void {
+        
+        let status = AVCaptureDevice.authorizationStatus(for:AVMediaType.audio)
+        
+        switch status  {
+            
+        case AVAuthorizationStatus.notDetermined:
+            
+            AVCaptureDevice.requestAccess(for: AVMediaType.audio, completionHandler: { (granted) in
+                
+                
+            })
+            
+            break
+            
+            
+        case AVAuthorizationStatus.authorized:
+            
+            break
+            
+        case AVAuthorizationStatus.denied: break
+            
+        case AVAuthorizationStatus.restricted: break
+            
+        default:
+            
+            break
+            
+        }
         
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
+    }
+    
+    //MARK: - Event
+    func startLive() -> Void {
+        let stream = LFLiveStreamInfo()
+        
+        stream.url = "rtmp://live-api-a.facebook.com:80/rtmp/165708634021154?ds=1&a=ATgHypOkT41Tqh8P";
+        //session.beautyFace = true
+        session.warterMarkView = currentlySelectedImg
+        session.warterMarkView?.frame = CGRectMake(20, view.frame.size.height - 320, view.frame.size.width - 60, 70)
+        session.warterMarkView?.alpha = 0.9
+        // session.warterMarkView?.isHidden = true
+        session.beautyFace = true
+        
+        session.startLive(stream)
+    }
+    
+    func stopLive() -> Void {
+        session.stopLive()
+    }
+    
+    //MARK: - Callback
+    func liveSession(_ session: LFLiveSession?, debugInfo: LFLiveDebug?) {
+        
+        print("Live Debugger: \(debugInfo)")
+        
+    }
+    func liveSession(_ session: LFLiveSession?, errorCode: LFLiveSocketErrorCode) {
+        
+        print("Live Error: \(errorCode)")
+        
+    }
+    func liveSession(_ session: LFLiveSession?, liveStateDidChange state: LFLiveState) {
+        
+        print("State: \(state)")
         
     }
     
@@ -154,6 +285,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.btnBack.layer.cornerRadius = 15
         cell.btnBack.layer.masksToBounds = true
         
+        if indexPath.row == selectedNewsIndex {
+            cell.blueImg.image = UIImage(named: "stary")
+
+        } else {
+            cell.blueImg.image = UIImage(named: "add")
+ 
+        }
+        
         // SAMPLE VALUES
         cell.title.text = articleTitles[indexPath.row]
         cell.descrip.text = articleDescriptions[indexPath.row]
@@ -165,8 +304,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        newsCollectionView.reloadData()
+        
         selectedNewsIndex = indexPath.row
-        currentlySelectedImg.image = screenShotView(index: indexPath)
+        
+        let when = DispatchTime.now() + 1
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            
+            self.currentlySelectedImg.image = self.screenShotView(index: indexPath)
+            self.session.warterMarkView = self.currentlySelectedImg
+        }
 
         print(selectedNewsIndex)
         
@@ -343,26 +490,28 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         else{
             //Starts Live
             if firstTap {
-                FBLiveAPI.shared.startLive() { result in
-                    guard let streamUrlString = (result as? NSDictionary)?.value(forKey: "stream_url") as? String else {
-                        return
-                    }
-                    let streamUrl = URL(string: streamUrlString)
-                    
-                    guard let lastPathComponent = streamUrl?.lastPathComponent,
-                        let query = streamUrl?.query else {
-                            return
-                    }
-                    
-                    self.session.startRtmpSession(
-                        withURL: "rtmp://rtmp-api.facebook.com:80/rtmp/",
-                        andStreamKey: "\(lastPathComponent)?\(query)"
-                    )
-                    
-                    self.livePrivacyControl.isUserInteractionEnabled = false
-                }
-                recorder.record()
-                recorder.scImageView?.ciImage = currentlySelectedImg.image?.ciImage
+                
+                startLive()
+//                FBLiveAPI.shared.startLive() { result in
+//                    guard let streamUrlString = (result as? NSDictionary)?.value(forKey: "stream_url") as? String else {
+//                        return
+//                    }
+//                    let streamUrl = URL(string: streamUrlString)
+//
+//                    guard let lastPathComponent = streamUrl?.lastPathComponent,
+//                        let query = streamUrl?.query else {
+//                            return
+//                    }
+//
+//                    self.session.startRtmpSession(
+//                        withURL: "rtmp://rtmp-api.facebook.com:80/rtmp/",
+//                        andStreamKey: "\(lastPathComponent)?\(query)"
+//                    )
+//
+//                    self.livePrivacyControl.isUserInteractionEnabled = false
+//                }
+//                recorder.record()
+//                recorder.scImageView?.ciImage = currentlySelectedImg.image?.ciImage
                 
                 recordAndRecognizeSpeech()
                 isRecording = true
@@ -376,7 +525,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 
             } else {
                 
-                recorder.pause()
+                //recorder.pause()
                 
                 
                 if audioEngine.isRunning {
@@ -396,7 +545,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     }, completion: nil)
                     
                     //playView.addSubview(currentlySelectedImg)
-                    player.play()
+                    //player.play()
+                    
+                    stopLive()
                     
                     
                     // Save to camera roll
@@ -413,9 +564,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     
                 } else {
                     
-                    recorder.record()
-                    recorder.scImageView?.ciImage = currentlySelectedImg.image?.ciImage
-                    
+//                    recorder.record()
+//                    recorder.scImageView?.ciImage = currentlySelectedImg.image?.ciImage
+//
+                    startLive()
                     isRecording = true
                     
                     do {

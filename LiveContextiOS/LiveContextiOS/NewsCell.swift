@@ -15,6 +15,7 @@ class NewsCell: UICollectionViewCell {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var btnBack: UIView!
     @IBOutlet weak var btn: UIButton!
+    @IBOutlet weak var blueImg: UIImageView!
     
     
 }
