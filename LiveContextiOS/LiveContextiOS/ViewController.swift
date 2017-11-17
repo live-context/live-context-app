@@ -176,34 +176,37 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 
             }, completion: nil)
             
+        } else {
+            
+            if audioEngine.isRunning {
+                
+                audioEngine.pause()
+                
+                UIView.animate(withDuration: 0.4, animations: {
+                    
+                    self.goLiveBack.updateConstraintsIfNeeded()
+                    self.goLiveLbl.text = "Go Live"
+                    
+                }, completion: nil)
+                
+                detectedTxt.text = ""
+                
+            } else {
+                
+                audioEngine.reset()
+                
+                UIView.animate(withDuration: 0.4, animations: {
+                    
+                    self.goLiveBack.updateConstraintsIfNeeded()
+                    self.goLiveLbl.text = "Stop Recording"
+                    
+                }, completion: nil)
+            }
+            
         }
         
         firstTap = false
-        
-        if audioEngine.isRunning {
-            
-            audioEngine.pause()
-            
-            UIView.animate(withDuration: 0.4, animations: {
-                
-                self.goLiveBack.updateConstraintsIfNeeded()
-                self.goLiveLbl.text = "Go Live"
-                
-            }, completion: nil)
-            
-            detectedTxt.text = ""
-            
-        } else {
-            
-            audioEngine.reset()
-            
-            UIView.animate(withDuration: 0.4, animations: {
-                
-                self.goLiveBack.updateConstraintsIfNeeded()
-                self.goLiveLbl.text = "Stop Recording"
-                
-            }, completion: nil)
-        }
+    
     }
     
 }
