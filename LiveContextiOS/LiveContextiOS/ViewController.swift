@@ -8,6 +8,7 @@
 import UIKit
 import Speech
 import AVFoundation
+import SCRecorder
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, SFSpeechRecognizerDelegate {
 
@@ -19,6 +20,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var personInfoBack: UIView!
     @IBOutlet weak var goLiveBtn: UIButton!
     @IBOutlet weak var detectedTxt: UILabel!
+    @IBOutlet var previewView: UIView!
+    @IBOutlet weak var playView: UIView!
     
     var numArticles = 4
     var selectedNewsIndex = 0
@@ -45,10 +48,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var recognitionTask: SFSpeechRecognitionTask = SFSpeechRecognitionTask()
     
     // Camera
-    var captureSession: AVCaptureSession?
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
-    var captureDevice: AVCaptureDevice?
-    var captureAudio: AVCaptureDevice?
+    let session = SCRecordSession()
+    let recorder = SCRecorder()
+    let player = SCPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,12 +63,34 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         profileImgVIew.layer.cornerRadius = 17
         profileImgVIew.layer.masksToBounds = true
         profileImgVIew.contentMode = .scaleAspectFill
+        playView.layer.cornerRadius = 6
+        playView.layer.masksToBounds = true
         
         indicator.frame = CGRect(x: (view.frame.size.width / 2) - 50, y: newsCollectionView.frame.maxY, width: 100, height: 30)
         indicator.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         indicator.alpha = 0.6
         view.addSubview(indicator)
+        
+        if (!recorder.startRunning()) {
+            debugPrint("Recorder error: ", recorder.error as Any)
+        }
+        
+        recorder.session = session
+        recorder.device = AVCaptureDevice.Position.front
+        recorder.videoConfiguration.size = CGSize(width: view.frame.size.width, height: view.frame.size.height)
+        recorder.delegate = self
 
+    }
+    
+    override func viewDidLayoutSubviews() {
+        
+        recorder.previewView = previewView
+        
+        player.setItemBy(session.assetRepresentingSegments())
+        let playerLayer = AVPlayerLayer(player: player)
+        let bounds = playView.bounds
+        playerLayer.frame = bounds
+        playView.layer.addSublayer(playerLayer)
     }
 
     override func didReceiveMemoryWarning() {
@@ -191,10 +215,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // TODO
         
     }
+    
+    func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
+        return CGRect(x: x, y: y, width: width, height: height)
+    }
 
     @IBAction func goLiveBtnPressed(_ sender: Any) {
 
         if firstTap {
+            
+            recorder.record()
 
             recordAndRecognizeSpeech()
             isRecording = true
@@ -207,6 +237,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }, completion: nil)
             
         } else {
+            
+            recorder.pause()
             
             if audioEngine.isRunning {
                 
@@ -224,8 +256,24 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     
                 }, completion: nil)
                 
+                // Preview Video
+                // player.play()
+                
+                // Save to camera roll
+//                session.mergeSegments(usingPreset: AVAssetExportPresetHighestQuality) { (url, error) in
+//                    if (error == nil) {
+//                        url?.saveToCameraRollWithCompletion({ (path, error) in
+//                            debugPrint(path, error)
+//                        })
+//                    } else {
+//                        debugPrint(error as Any)
+//                    }
+//                }
+                
                 
             } else {
+                
+                recorder.record()
                 
                 isRecording = true
                 
@@ -249,5 +297,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     }
     
+}
+
+extension ViewController: SCRecorderDelegate {
+    
+    func recorder(_ recorder: SCRecorder, didAppendVideoSampleBufferIn session: SCRecordSession) {
+
+    }
 }
 

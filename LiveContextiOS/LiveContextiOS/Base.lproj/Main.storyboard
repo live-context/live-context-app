@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -135,16 +134,16 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFH-OC-6ld">
-                                <rect key="frame" x="260" y="597" width="95" height="50"/>
+                                <rect key="frame" x="258" y="597" width="97" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go Live" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dES-p0-gZe">
-                                        <rect key="frame" x="20" y="0.0" width="55" height="50"/>
+                                        <rect key="frame" x="20" y="0.0" width="57" height="50"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nD-qS-WER">
-                                        <rect key="frame" x="0.0" y="0.0" width="95" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="97" height="50"/>
                                         <connections>
                                             <action selector="goLiveBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Am3-hf-gdD"/>
                                         </connections>
@@ -164,7 +163,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97o-jG-C8y">
-                                <rect key="frame" x="20" y="597" width="157" height="50"/>
+                                <rect key="frame" x="20" y="597" width="165.5" height="50"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face" translatesAutoresizingMaskIntoConstraints="NO" id="zgP-Fn-FcZ">
                                         <rect key="frame" x="8" y="8" width="34" height="34"/>
@@ -173,13 +172,13 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POSTING AS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFU-yq-43e">
-                                        <rect key="frame" x="52" y="10" width="53.5" height="10.5"/>
+                                        <rect key="frame" x="52" y="10" width="51.5" height="13"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="9"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pablo Garces" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4e-Qk-Kww">
-                                        <rect key="frame" x="52" y="20.5" width="85" height="16.5"/>
+                                        <rect key="frame" x="52" y="23" width="93.5" height="20"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -204,9 +203,18 @@
                                 <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xzt-78-Noj">
+                                <rect key="frame" x="255" y="437" width="100" height="140"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="QAt-VV-5YQ"/>
+                                    <constraint firstAttribute="width" constant="100" id="waW-WT-Lde"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.72156862745098038" green="0.72336632013320923" blue="0.72336632013320923" alpha="0.36342459862385323" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Xzt-78-Noj" secondAttribute="trailing" constant="20" id="3ln-TA-CMW"/>
                             <constraint firstItem="HIj-HY-ysI" firstAttribute="top" secondItem="J0I-vs-75r" secondAttribute="bottom" constant="20" id="EOB-do-Zvk"/>
                             <constraint firstItem="J0I-vs-75r" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="JU7-b6-YdJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HIj-HY-ysI" secondAttribute="trailing" constant="20" id="JoF-w3-0uO"/>
@@ -216,6 +224,7 @@
                             <constraint firstItem="HIj-HY-ysI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="X44-co-wFJ"/>
                             <constraint firstItem="J0I-vs-75r" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="cls-3z-h9A"/>
                             <constraint firstItem="J0I-vs-75r" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="hqx-4s-NH2"/>
+                            <constraint firstItem="FFH-OC-6ld" firstAttribute="top" secondItem="Xzt-78-Noj" secondAttribute="bottom" constant="20" id="jH3-7I-lEb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="97o-jG-C8y" secondAttribute="bottom" constant="20" id="uv4-16-bew"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FFH-OC-6ld" secondAttribute="bottom" constant="20" id="vH6-Lf-mdI"/>
                         </constraints>
@@ -229,6 +238,8 @@
                         <outlet property="newsCollectionView" destination="J0I-vs-75r" id="wpU-2C-fos"/>
                         <outlet property="personInfoBack" destination="97o-jG-C8y" id="p1q-do-bfZ"/>
                         <outlet property="personName" destination="V4e-Qk-Kww" id="6tJ-bn-VdV"/>
+                        <outlet property="playView" destination="Xzt-78-Noj" id="Q2S-UW-jVx"/>
+                        <outlet property="previewView" destination="8bC-Xf-vdC" id="TXK-hp-l7S"/>
                         <outlet property="profileImgVIew" destination="zgP-Fn-FcZ" id="eKg-x8-F9F"/>
                     </connections>
                 </viewController>
