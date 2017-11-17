@@ -112,6 +112,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let bounds = playView.bounds
         playerLayer.frame = bounds
         playView.layer.addSublayer(playerLayer)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -123,6 +124,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return articleTitles.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -308,6 +310,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         } else {
             
             recorder.pause()
+            let image = UIImage(named: "img")
+            recorder.scImageView?.setImageBy(image)
             
             if audioEngine.isRunning {
                 
@@ -326,7 +330,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 }, completion: nil)
                 
                 // Preview Video
-                // player.play()
+                player.scImageView?.setImageBy(image)
+                player.play()
+                
                 
                 // Save to camera roll
 //                session.mergeSegments(usingPreset: AVAssetExportPresetHighestQuality) { (url, error) in
@@ -338,6 +344,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 //                        debugPrint(error as Any)
 //                    }
 //                }
+                
                 
                 
             } else {
