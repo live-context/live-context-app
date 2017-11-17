@@ -50,6 +50,7 @@
 		20E177AC1FBE3CAF009FD129 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7C59CDCD1015DA42F7ACBCDA /* Pods-LiveContextiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveContextiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7D9062EC87D69BE97DFC8816 /* Pods-LiveContextiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveContextiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS.release.xcconfig"; sourceTree = "<group>"; };
+		AC74F4D01FBEA75B00935F20 /* LiveContextiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LiveContextiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		C439C4BCC4738A083AD98C76 /* Pods_LiveContextiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiveContextiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -110,6 +111,7 @@
 				20E177911FBE3CAF009FD129 /* Assets.xcassets */,
 				20E177931FBE3CAF009FD129 /* LaunchScreen.storyboard */,
 				20E177961FBE3CAF009FD129 /* Info.plist */,
+				AC74F4D01FBEA75B00935F20 /* LiveContextiOS-Bridging-Header.h */,
 			);
 			path = LiveContextiOS;
 			sourceTree = "<group>";
