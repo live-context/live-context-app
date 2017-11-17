@@ -22,6 +22,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var numArticles = 4
     var selectedNewsIndex = 0
     var currentNewsIndex = 0
+    var firstTap = true
     
     lazy var indicator: UIPageControl = {
         let pc = UIPageControl()
@@ -165,17 +166,27 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     @IBAction func goLiveBtnPressed(_ sender: Any) {
         
-        UIView.animate(withDuration: 0.4, animations: {
-            
-            self.goLiveLbl.text = "Stop Recording"
-            
-        }, completion: nil)
-        
-        if audioEngine.isRunning {
-            audioEngine.stop()
+        if firstTap {
+            recordAndRecognizeSpeech()
             
             UIView.animate(withDuration: 0.4, animations: {
                 
+                self.goLiveBack.updateConstraintsIfNeeded()
+                self.goLiveLbl.text = "Stop Recording"
+                
+            }, completion: nil)
+            
+        }
+        
+        firstTap = false
+        
+        if audioEngine.isRunning {
+            
+            audioEngine.pause()
+            
+            UIView.animate(withDuration: 0.4, animations: {
+                
+                self.goLiveBack.updateConstraintsIfNeeded()
                 self.goLiveLbl.text = "Go Live"
                 
             }, completion: nil)
@@ -183,10 +194,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             detectedTxt.text = ""
             
         } else {
-            recordAndRecognizeSpeech()
+            
+            audioEngine.reset()
             
             UIView.animate(withDuration: 0.4, animations: {
                 
+                self.goLiveBack.updateConstraintsIfNeeded()
                 self.goLiveLbl.text = "Stop Recording"
                 
             }, completion: nil)
