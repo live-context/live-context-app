@@ -30,18 +30,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var searchQuery = ""
     
-    var articleTitles = ["This is happening in some place, here is some sample text.",
-                         "This is happening in some place, here is some sample text.",
-                         "This is happening in some place, here is some sample text.",
-                         "This is happening in some place, here is some sample text."]
-    var articleDescriptions = ["This is the description of the news.",
-                         "This is the description of the news.",
-                         "This is the description of the news.",
-                         "This is the description of the news."]
-    var articleImageNames = ["img",
-                               "img",
-                               "img",
-                               "img"]
+    var articleTitles = [String]()
+    var articleDescriptions = [String]()
+    var articleImageNames = [String]()
+    
+    var newsUpdate = false
     
     var selectedNewsIndex = 0
     var currentNewsIndex = 0
@@ -471,6 +464,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
         return CGRect(x: x, y: y, width: width, height: height)
     }
+    
+    func updateNews(everySeconds: Int){
+        
+        if self.newsUpdate{
+            let delayTime = DispatchTime.now() + everySeconds
+                DispatchQueue.main.asyncAfter(deadline: delayTime, execute: {
+                    self.newsRequest(queryString: self.searchQuery)
+                    print("Search query after delay: \(self.searchQuery)")
+                    
+                    self.updateNews(everySeconds)
+                })
+        }
+    }
 
     @IBAction func goLiveBtnPressed(_ sender: Any) {
 
@@ -526,10 +532,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     
                 }, completion: nil)
                 
+                self.newsUpdate = true
+                self.updateNews(everySeconds: 10)
+                
             } else {
                 
                 //recorder.pause()
-                
+                self.newsUpdate = false
                 
                 if audioEngine.isRunning {
                     
@@ -588,6 +597,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     } catch {
                         return print(error)
                     }
+                    
+                    self.newsUpdate = true
+                    self.updateNews(everySeconds: 10)
                     
                     UIView.animate(withDuration: 0.4, animations: {
                         
@@ -692,7 +704,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 print(response)
             }
             if let data = data {
-                do {
+                //do {
                     let json = JSON(data)//try JSONSerialization.jsonObject(with: data, options: [])
                     //                    print(json)
                     self.articleTitles = json["articles"].arrayValue.map({$0["title"].stringValue})
@@ -705,11 +717,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     
                     print("titles", self.articleTitles)
                     print("dscpts", self.articleDescriptions)
-                    print("images",self.articleImageNames)
+                    print("images", self.articleImageNames)
                     //                    for article in articles {
                     //                        self.articleTitles.append(articl)
                     //                    }
-                }
+                //}
                 //                } catch {
                 //                    print(error)
                 //                }
