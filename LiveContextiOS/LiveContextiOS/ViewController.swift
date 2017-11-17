@@ -331,8 +331,26 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }
         }
         else{
+            //Starts Live
             if firstTap {
-                
+                FBLiveAPI.shared.startLive() { result in
+                    guard let streamUrlString = (result as? NSDictionary)?.value(forKey: "stream_url") as? String else {
+                        return
+                    }
+                    let streamUrl = URL(string: streamUrlString)
+                    
+                    guard let lastPathComponent = streamUrl?.lastPathComponent,
+                        let query = streamUrl?.query else {
+                            return
+                    }
+                    
+                    self.session.startRtmpSession(
+                        withURL: "rtmp://rtmp-api.facebook.com:80/rtmp/",
+                        andStreamKey: "\(lastPathComponent)?\(query)"
+                    )
+                    
+                    self.livePrivacyControl.isUserInteractionEnabled = false
+                }
                 recorder.record()
                 
                 recordAndRecognizeSpeech()

@@ -17,6 +17,7 @@
 		20E177A01FBE3CAF009FD129 /* LiveContextiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1779F1FBE3CAF009FD129 /* LiveContextiOSTests.swift */; };
 		20E177AB1FBE3CAF009FD129 /* LiveContextiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E177AA1FBE3CAF009FD129 /* LiveContextiOSUITests.swift */; };
 		20E177C31FBEA99A009FD129 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E177C21FBEA99A009FD129 /* NewsCell.swift */; };
+		AC158E241FBEE7540058F8D7 /* FBLiveAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC158E231FBEE7540058F8D7 /* FBLiveAPI.swift */; };
 		B1C550E54DC647763DDB547F /* Pods_LiveContextiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C439C4BCC4738A083AD98C76 /* Pods_LiveContextiOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,7 @@
 		20E177C21FBEA99A009FD129 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		7C59CDCD1015DA42F7ACBCDA /* Pods-LiveContextiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveContextiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7D9062EC87D69BE97DFC8816 /* Pods-LiveContextiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveContextiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS.release.xcconfig"; sourceTree = "<group>"; };
+		AC158E231FBEE7540058F8D7 /* FBLiveAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLiveAPI.swift; sourceTree = "<group>"; };
 		AC74F4D01FBEA75B00935F20 /* LiveContextiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LiveContextiOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		C439C4BCC4738A083AD98C76 /* Pods_LiveContextiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LiveContextiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -121,6 +123,7 @@
 				20E177961FBE3CAF009FD129 /* Info.plist */,
 				AC74F4D01FBEA75B00935F20 /* LiveContextiOS-Bridging-Header.h */,
 				20E177C21FBEA99A009FD129 /* NewsCell.swift */,
+				AC158E231FBEE7540058F8D7 /* FBLiveAPI.swift */,
 			);
 			path = LiveContextiOS;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC158E241FBEE7540058F8D7 /* FBLiveAPI.swift in Sources */,
 				20E1778D1FBE3CAF009FD129 /* ViewController.swift in Sources */,
 				20E177C31FBEA99A009FD129 /* NewsCell.swift in Sources */,
 				20E1778B1FBE3CAF009FD129 /* AppDelegate.swift in Sources */,
