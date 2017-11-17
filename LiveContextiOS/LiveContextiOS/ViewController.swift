@@ -12,7 +12,8 @@ import SCRecorder
 import FBSDKLoginKit
 import FBSDKCoreKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, SFSpeechRecognizerDelegat, FBSDKLoginButtonDelegate {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, SFSpeechRecognizerDelegate, FBSDKLoginButtonDelegate {
+    
 
     @IBOutlet weak var goLiveBack: UIView!
     @IBOutlet weak var newsCollectionView: UICollectionView!
@@ -68,6 +69,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        profileImgVIew.image = UIImage(named: "face")
+        personName.text = "Robert Hernandez"
         
         newsCollectionView.delegate = self
         newsCollectionView.dataSource = self
@@ -159,6 +163,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         selectedNewsIndex = indexPath.row
+        screenShotView()
+
+        print(selectedNewsIndex)
         
     }
     
@@ -166,6 +173,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         currentNewsIndex = indexPath.row
         
+    }
+    
+    func screenShotView() {
+        
+        //Create the UIImage
+        UIGraphicsBeginImageContext(newsCollectionView.frame.size)
+        newsCollectionView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        //Save it to the camera roll
+        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -295,27 +314,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     @IBAction func goLiveBtnPressed(_ sender: Any) {
 
-        if firstTap {
+        //Facebook Account Token
+        let accessToken = FBSDKAccessToken.current()
+        
+        //Not loged in
+        if accessToken == nil{
+            let loginButton = FBSDKLoginButton()
+            loginButton.delegate = self
+            loginButton.loginBehavior = FBSDKLoginBehavior.native
             
-            recorder.record()
-
-            recordAndRecognizeSpeech()
-            isRecording = true
-            
-            UIView.animate(withDuration: 0.4, animations: {
-                
-                self.goLiveBack.updateConstraintsIfNeeded()
-                self.goLiveLbl.text = "Stop Recording"
-                
-            }, completion: nil)
-            
-        } else {
-            
-            recorder.pause()
-            let image = UIImage(named: "img")
-            recorder.scImageView?.setImageBy(image)
-            
-            FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile","publish_actions"], from: self) { (result, err) in
+            FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile"], from: self) { (result, err) in
                 if err != nil {
                     print("Login failed")
                 }
@@ -326,7 +334,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             if firstTap {
                 
                 recorder.record()
-
+                
                 recordAndRecognizeSpeech()
                 isRecording = true
                 
@@ -337,27 +345,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     
                 }, completion: nil)
                 
-                // Preview Video
-                player.scImageView?.setImageBy(image)
-                player.play()
-                
-                
-                // Save to camera roll
-//                session.mergeSegments(usingPreset: AVAssetExportPresetHighestQuality) { (url, error) in
-//                    if (error == nil) {
-//                        url?.saveToCameraRollWithCompletion({ (path, error) in
-//                            debugPrint(path, error)
-//                        })
-//                    } else {
-//                        debugPrint(error as Any)
-//                    }
-//                }
-                
-                
-                
             } else {
                 
                 recorder.pause()
+                
                 
                 if audioEngine.isRunning {
                     
@@ -375,19 +366,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                         
                     }, completion: nil)
                     
-                    // Preview Video
-                    // player.play()
+                    player.play()
                     
                     // Save to camera roll
-    //                session.mergeSegments(usingPreset: AVAssetExportPresetHighestQuality) { (url, error) in
-    //                    if (error == nil) {
-    //                        url?.saveToCameraRollWithCompletion({ (path, error) in
-    //                            debugPrint(path, error)
-    //                        })
-    //                    } else {
-    //                        debugPrint(error as Any)
-    //                    }
-    //                }
+                    //                session.mergeSegments(usingPreset: AVAssetExportPresetHighestQuality) { (url, error) in
+                    //                    if (error == nil) {
+                    //                        url?.saveToCameraRollWithCompletion({ (path, error) in
+                    //                            debugPrint(path, error)
+                    //                        })
+                    //                    } else {
+                    //                        debugPrint(error as Any)
+                    //                    }
+                    //                }
                     
                     
                 } else {
@@ -413,7 +403,24 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             }
             
             firstTap = false
-            }
+        }
+    }
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        
+        if error == nil {
+            
+            profileImgVIew.image = UIImage(named: "face")
+            personName.text = "Robert Hernandez"
+            
+        }
+        
+        return
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        
+        return
     }
     
 }
