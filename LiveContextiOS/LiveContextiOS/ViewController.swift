@@ -189,9 +189,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         articleTitles.append("New Title")
         articleDescriptions.append("New Description")
         
-        let indexPath = IndexPath(row: articleImageNames.count, section: 0)
+        newsCollectionView.reloadData()
+        print("Items: \(articleImageNames.count)")
         
-        newsCollectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
+        let indexPath = IndexPath(row: articleTitles.count - 1, section: 0)
+        
+        newsCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
 
     }
     
