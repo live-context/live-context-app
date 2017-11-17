@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15649D92B9E78114A226C861 /* libPods-LiveContextiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 458FD857D978566494A3569A /* libPods-LiveContextiOS.a */; };
 		20E1778B1FBE3CAF009FD129 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1778A1FBE3CAF009FD129 /* AppDelegate.swift */; };
 		20E1778D1FBE3CAF009FD129 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1778C1FBE3CAF009FD129 /* ViewController.swift */; };
 		20E177901FBE3CAF009FD129 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20E1778E1FBE3CAF009FD129 /* Main.storyboard */; };
@@ -47,6 +48,9 @@
 		20E177A61FBE3CAF009FD129 /* LiveContextiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveContextiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20E177AA1FBE3CAF009FD129 /* LiveContextiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveContextiOSUITests.swift; sourceTree = "<group>"; };
 		20E177AC1FBE3CAF009FD129 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		458FD857D978566494A3569A /* libPods-LiveContextiOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveContextiOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4DAED944EBA6722C683507F3 /* Pods-LiveContextiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveContextiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS.release.xcconfig"; sourceTree = "<group>"; };
+		FB3F69EC16E34D76D63CB2E8 /* Pods-LiveContextiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveContextiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15649D92B9E78114A226C861 /* libPods-LiveContextiOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +79,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0859F3A0D0E11409AA34CE1C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FB3F69EC16E34D76D63CB2E8 /* Pods-LiveContextiOS.debug.xcconfig */,
+				4DAED944EBA6722C683507F3 /* Pods-LiveContextiOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		20E1777E1FBE3CAF009FD129 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +95,8 @@
 				20E1779E1FBE3CAF009FD129 /* LiveContextiOSTests */,
 				20E177A91FBE3CAF009FD129 /* LiveContextiOSUITests */,
 				20E177881FBE3CAF009FD129 /* Products */,
+				0859F3A0D0E11409AA34CE1C /* Pods */,
+				419E64815E324560B5D1D2E0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +141,14 @@
 			path = LiveContextiOSUITests;
 			sourceTree = "<group>";
 		};
+		419E64815E324560B5D1D2E0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				458FD857D978566494A3569A /* libPods-LiveContextiOS.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +156,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 20E177AF1FBE3CAF009FD129 /* Build configuration list for PBXNativeTarget "LiveContextiOS" */;
 			buildPhases = (
+				087DDF99F9143168CE0EFD9F /* [CP] Check Pods Manifest.lock */,
 				20E177831FBE3CAF009FD129 /* Sources */,
 				20E177841FBE3CAF009FD129 /* Frameworks */,
 				20E177851FBE3CAF009FD129 /* Resources */,
+				25610C89DACE807FE0AD7855 /* [CP] Embed Pods Frameworks */,
+				5D1D7D1E17A03B5F1CF02C43 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -252,6 +279,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		087DDF99F9143168CE0EFD9F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LiveContextiOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		25610C89DACE807FE0AD7855 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5D1D7D1E17A03B5F1CF02C43 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		20E177831FBE3CAF009FD129 /* Sources */ = {
@@ -423,6 +504,7 @@
 		};
 		20E177B01FBE3CAF009FD129 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FB3F69EC16E34D76D63CB2E8 /* Pods-LiveContextiOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -438,6 +520,7 @@
 		};
 		20E177B11FBE3CAF009FD129 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DAED944EBA6722C683507F3 /* Pods-LiveContextiOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
