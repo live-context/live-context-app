@@ -6,5 +6,7 @@ target 'LiveContextiOS' do
   use_frameworks!
 	pod 'FBSDKShareKit'
 	pod 'FBSDKLoginKit'
+    
+    pod 'SCRecorder'
 
 end

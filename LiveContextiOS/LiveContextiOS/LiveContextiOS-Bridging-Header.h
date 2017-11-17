@@ -12,5 +12,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
+#import <SCRecorder/SCRecorder.h>
+
 
 #endif /* LiveContextiOS_Bridging_Header_h */
