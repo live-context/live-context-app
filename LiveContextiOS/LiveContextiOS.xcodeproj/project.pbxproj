@@ -16,6 +16,7 @@
 		20E177AB1FBE3CAF009FD129 /* LiveContextiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E177AA1FBE3CAF009FD129 /* LiveContextiOSUITests.swift */; };
 		20E177BF1FBEA783009FD129 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20E177BE1FBEA782009FD129 /* Poppins-Medium.ttf */; };
 		20E177C11FBEA78C009FD129 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20E177C01FBEA78C009FD129 /* Poppins-Regular.ttf */; };
+		20E177C31FBEA99A009FD129 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E177C21FBEA99A009FD129 /* NewsCell.swift */; };
 		B1C550E54DC647763DDB547F /* Pods_LiveContextiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C439C4BCC4738A083AD98C76 /* Pods_LiveContextiOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,7 @@
 		20E177AC1FBE3CAF009FD129 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20E177BE1FBEA782009FD129 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../../Downloads/Poppins 2/Poppins-Medium.ttf"; sourceTree = "<group>"; };
 		20E177C01FBEA78C009FD129 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../../../../Downloads/Poppins 2/Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		20E177C21FBEA99A009FD129 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		7C59CDCD1015DA42F7ACBCDA /* Pods-LiveContextiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveContextiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7D9062EC87D69BE97DFC8816 /* Pods-LiveContextiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveContextiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS.release.xcconfig"; sourceTree = "<group>"; };
 		AC74F4D01FBEA75B00935F20 /* LiveContextiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LiveContextiOS-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				20E177931FBE3CAF009FD129 /* LaunchScreen.storyboard */,
 				20E177961FBE3CAF009FD129 /* Info.plist */,
 				AC74F4D01FBEA75B00935F20 /* LiveContextiOS-Bridging-Header.h */,
+				20E177C21FBEA99A009FD129 /* NewsCell.swift */,
 			);
 			path = LiveContextiOS;
 			sourceTree = "<group>";
@@ -321,7 +324,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		CA223474E763640CA4380697 /* [CP] Embed Pods Frameworks */ = {
@@ -356,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20E1778D1FBE3CAF009FD129 /* ViewController.swift in Sources */,
+				20E177C31FBEA99A009FD129 /* NewsCell.swift in Sources */,
 				20E1778B1FBE3CAF009FD129 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
