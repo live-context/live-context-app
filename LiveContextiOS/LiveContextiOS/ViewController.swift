@@ -13,6 +13,7 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import LFLiveKit
 import SwiftyJSON
+import SDWebImage
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, SFSpeechRecognizerDelegate, FBSDKLoginButtonDelegate, LFLiveSessionDelegate {
     
@@ -223,7 +224,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func startLive() -> Void {
         let stream = LFLiveStreamInfo()
         
-        stream.url = "rtmp://live-api-a.facebook.com:80/rtmp/165708634021154?ds=1&a=ATgHypOkT41Tqh8P";
+        stream.url = "rtmp://live-api-a.facebook.com:80/rtmp/165765840682100?ds=1&a=ATgXDsUqBnHVY_Xd";
         //session.beautyFace = true
         session.warterMarkView = currentlySelectedImg
         session.warterMarkView?.frame = CGRectMake(20, view.frame.size.height - 320, view.frame.size.width - 60, 70)
@@ -290,7 +291,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // SAMPLE VALUES
         cell.title.text = articleTitles[indexPath.row]
         cell.descrip.text = articleDescriptions[indexPath.row]
-        cell.image.image = UIImage(named: articleImageNames[indexPath.row])
+        cell.image.image = UIImage(named: "placeholder")
+        
         
         return cell
         
@@ -542,15 +544,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     
                     UIView.animate(withDuration: 0.4, animations: {
                         
-                        self.goLiveBack.updateConstraintsIfNeeded()
-                        self.goLiveLbl.text = "Go Live"
+                        //self.goLiveBack.updateConstraintsIfNeeded()
+                        //self.goLiveLbl.text = "Go Live"
                         
                     }, completion: nil)
                     
                     //playView.addSubview(currentlySelectedImg)
                     //player.play()
                     
-                    stopLive()
+                    //stopLive()
                     
                     
                     // Save to camera roll

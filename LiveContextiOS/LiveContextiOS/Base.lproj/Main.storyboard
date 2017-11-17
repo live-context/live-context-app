@@ -135,16 +135,16 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFH-OC-6ld">
-                                <rect key="frame" x="260" y="597" width="95" height="50"/>
+                                <rect key="frame" x="258" y="597" width="97" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Go Live" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dES-p0-gZe">
-                                        <rect key="frame" x="20" y="0.0" width="55" height="50"/>
+                                        <rect key="frame" x="20" y="0.0" width="57" height="50"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3nD-qS-WER">
-                                        <rect key="frame" x="0.0" y="0.0" width="95" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="97" height="50"/>
                                         <connections>
                                             <action selector="goLiveBtnPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Am3-hf-gdD"/>
                                         </connections>
@@ -164,7 +164,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="97o-jG-C8y">
-                                <rect key="frame" x="20" y="597" width="156.5" height="50"/>
+                                <rect key="frame" x="20" y="597" width="162" height="50"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="zgP-Fn-FcZ">
                                         <rect key="frame" x="8" y="8" width="34" height="34"/>
@@ -173,13 +173,13 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="POSTING AS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFU-yq-43e">
-                                        <rect key="frame" x="52" y="10" width="53.5" height="10.5"/>
+                                        <rect key="frame" x="52" y="10" width="51.5" height="13"/>
                                         <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="9"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Login!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V4e-Qk-Kww">
-                                        <rect key="frame" x="52" y="20.5" width="84.5" height="16.5"/>
+                                        <rect key="frame" x="52" y="23" width="90" height="20"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                         <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>

@@ -12,7 +12,37 @@ PODS:
   - FBSDKShareKit (4.28.0):
     - FBSDKCoreKit
   - LFLiveKit (2.6)
+  - libwebp (0.6.0):
+    - libwebp/core (= 0.6.0)
+    - libwebp/dec (= 0.6.0)
+    - libwebp/demux (= 0.6.0)
+    - libwebp/dsp (= 0.6.0)
+    - libwebp/enc (= 0.6.0)
+    - libwebp/mux (= 0.6.0)
+    - libwebp/utils (= 0.6.0)
+    - libwebp/webp (= 0.6.0)
+  - libwebp/core (0.6.0):
+    - libwebp/webp
+  - libwebp/dec (0.6.0):
+    - libwebp/core
+  - libwebp/demux (0.6.0):
+    - libwebp/core
+  - libwebp/dsp (0.6.0):
+    - libwebp/core
+  - libwebp/enc (0.6.0):
+    - libwebp/core
+  - libwebp/mux (0.6.0):
+    - libwebp/core
+  - libwebp/utils (0.6.0):
+    - libwebp/core
+  - libwebp/webp (0.6.0)
   - SCRecorder (2.7.0)
+  - SDWebImage (4.2.2):
+    - SDWebImage/Core (= 4.2.2)
+  - SDWebImage/Core (4.2.2)
+  - SDWebImage/WebP (4.2.2):
+    - libwebp
+    - SDWebImage/Core
   - SwiftyJSON (4.0.0)
 
 DEPENDENCIES:
@@ -20,6 +50,8 @@ DEPENDENCIES:
   - FBSDKShareKit
   - LFLiveKit
   - SCRecorder
+  - SDWebImage
+  - SDWebImage/WebP
   - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -28,9 +60,11 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: b077381c27d800f21661757e8140cf2c80a91e4a
   FBSDKShareKit: 4f525556e0df4cf0f574cb3f01c675434f29d477
   LFLiveKit: 2219563721f8aa0f188effc3395a06e2d53b23f2
+  libwebp: 1d5a07c2eb97f9c31bd5f154bb82efc0ea67c6a2
   SCRecorder: bbb521dbc222908876ec9cd9156bbc8a893bed44
+  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
 
-PODFILE CHECKSUM: 8b234b003ef4373256ab938a09edbce79452e3c1
+PODFILE CHECKSUM: 3d44c8f22786b6088c5d5a7476378c88b1974f51
 
 COCOAPODS: 1.2.1
