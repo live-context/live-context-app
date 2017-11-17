@@ -23,7 +23,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet var previewView: UIView!
     @IBOutlet weak var playView: UIView!
     
-    var numArticles = 0
     var articleTitles = ["This is happening in some place, here is some sample text.",
                          "This is happening in some place, here is some sample text.",
                          "This is happening in some place, here is some sample text.",
@@ -46,7 +45,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     lazy var indicator: UIPageControl = {
         let pc = UIPageControl()
-        pc.numberOfPages = numArticles
         
         pc.pageIndicatorTintColor = UIColor(red: 241/255, green: 241/255, blue: 241/255, alpha: 1)
         pc.currentPageIndicatorTintColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
@@ -69,8 +67,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        numArticles = articleTitles.count
-        
         newsCollectionView.delegate = self
         newsCollectionView.dataSource = self
         goLiveBack.layer.cornerRadius = 6
@@ -84,6 +80,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         indicator.frame = CGRect(x: (view.frame.size.width / 2) - 50, y: newsCollectionView.frame.maxY, width: 100, height: 30)
         indicator.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         indicator.alpha = 0.6
+        indicator.numberOfPages = articleTitles.count
         view.addSubview(indicator)
         
         if (!recorder.startRunning()) {
@@ -100,7 +97,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         DispatchQueue.main.asyncAfter(deadline: when) {
             // Your code with delay
             
-            self.addArticle()
+            self.addArticle(title: "New Title", description: "New Description", imgName: "img")
             
         }
 
@@ -125,7 +122,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return numArticles
+        return articleTitles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -167,7 +164,38 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+//        let views = newsCollectionView.visibleCells
+//
+//        for view in views {
+//
+//            let subviews = view.subviews
+//
+//            for subview in subviews {
+//
+//                subview.layer.opacity = 0.0
+//            }
+//        }
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+//        UIView.animate(withDuration: 0.4, animations: {
+//
+//            let views = self.newsCollectionView.visibleCells
+//
+//            for view in views {
+//
+//                let subviews = view.subviews
+//
+//                for subview in subviews {
+//
+//                    subview.layer.opacity = 1.0
+//                }
+//            }
+//
+//        }, completion: nil)
         
         indicator.currentPage = currentNewsIndex
         
@@ -183,16 +211,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
-    func addArticle() {
+    func addArticle(title: String, description: String, imgName: String) {
         
-        articleImageNames.append("img")
-        articleTitles.append("New Title")
-        articleDescriptions.append("New Description")
+        articleImageNames.append(imgName)
+        articleTitles.append(title)
+        articleDescriptions.append(description)
         
         newsCollectionView.reloadData()
-        print("Items: \(articleImageNames.count)")
+        newsCollectionView.reloadInputViews()
         
         let indexPath = IndexPath(row: articleTitles.count - 1, section: 0)
+        
+        print("Items: \(articleImageNames.count)")
         
         newsCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
 
