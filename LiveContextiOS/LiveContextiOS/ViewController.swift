@@ -7,6 +7,7 @@
 
 import UIKit
 import Speech
+import AVFoundation
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, SFSpeechRecognizerDelegate {
 
@@ -23,6 +24,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var selectedNewsIndex = 0
     var currentNewsIndex = 0
     var firstTap = true
+    var isRecording = false
+    var recordedText = ""
+    var tempTxt = ""
     
     lazy var indicator: UIPageControl = {
         let pc = UIPageControl()
@@ -40,6 +44,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask = SFSpeechRecognitionTask()
     
+    // Camera
+    var captureSession: AVCaptureSession?
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
+    var captureDevice: AVCaptureDevice?
+    var captureAudio: AVCaptureDevice?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -56,7 +66,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         indicator.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         indicator.alpha = 0.6
         view.addSubview(indicator)
-        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -155,7 +165,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             if let result = result {
                 
                 let bestString = result.bestTranscription.formattedString
-                self.detectedTxt.text = bestString
+                self.tempTxt = bestString
                 
             } else if let error  = error {
                 print(error)
@@ -163,11 +173,31 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }))!
         
     }
+    
+    func recordVideo() {
+        
+        // TODO
+        
+    }
+    
+    func saveVideo() {
+        
+        // TODO
+        
+    }
+    
+    func overlayVideo() {
+        
+        // TODO
+        
+    }
 
     @IBAction func goLiveBtnPressed(_ sender: Any) {
-        
+
         if firstTap {
+
             recordAndRecognizeSpeech()
+            isRecording = true
             
             UIView.animate(withDuration: 0.4, animations: {
                 
@@ -180,7 +210,12 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             if audioEngine.isRunning {
                 
-                audioEngine.pause()
+                recordedText = "\(tempTxt)"
+                self.detectedTxt.text = self.recordedText
+                
+                audioEngine.stop()
+                
+                isRecording = false
                 
                 UIView.animate(withDuration: 0.4, animations: {
                     
@@ -189,11 +224,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     
                 }, completion: nil)
                 
-                detectedTxt.text = ""
                 
             } else {
                 
-                audioEngine.reset()
+                isRecording = true
+                
+                do {
+                    try audioEngine.start()
+                } catch {
+                    return print(error)
+                }
                 
                 UIView.animate(withDuration: 0.4, animations: {
                     
