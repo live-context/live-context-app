@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		203451EF1FBED31E001EF440 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 203451ED1FBED31D001EF440 /* Poppins-Regular.ttf */; };
 		203451F01FBED31E001EF440 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 203451EE1FBED31E001EF440 /* Poppins-Medium.ttf */; };
+		203451F21FBF402B001EF440 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203451F11FBF402B001EF440 /* APIManager.swift */; };
 		20E1778B1FBE3CAF009FD129 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1778A1FBE3CAF009FD129 /* AppDelegate.swift */; };
 		20E1778D1FBE3CAF009FD129 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1778C1FBE3CAF009FD129 /* ViewController.swift */; };
 		20E177901FBE3CAF009FD129 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20E1778E1FBE3CAF009FD129 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		203451ED1FBED31D001EF440 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../../../../Downloads/Poppins/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		203451EE1FBED31E001EF440 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Medium.ttf"; path = "../../../../Downloads/Poppins/Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		203451F11FBF402B001EF440 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		20E177871FBE3CAF009FD129 /* LiveContextiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveContextiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20E1778A1FBE3CAF009FD129 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20E1778C1FBE3CAF009FD129 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				AC74F4D01FBEA75B00935F20 /* LiveContextiOS-Bridging-Header.h */,
 				20E177C21FBEA99A009FD129 /* NewsCell.swift */,
 				AC158E231FBEE7540058F8D7 /* FBLiveAPI.swift */,
+				203451F11FBF402B001EF440 /* APIManager.swift */,
 			);
 			path = LiveContextiOS;
 			sourceTree = "<group>";
@@ -363,6 +366,7 @@
 			files = (
 				AC158E241FBEE7540058F8D7 /* FBLiveAPI.swift in Sources */,
 				20E1778D1FBE3CAF009FD129 /* ViewController.swift in Sources */,
+				203451F21FBF402B001EF440 /* APIManager.swift in Sources */,
 				20E177C31FBEA99A009FD129 /* NewsCell.swift in Sources */,
 				20E1778B1FBE3CAF009FD129 /* AppDelegate.swift in Sources */,
 			);

@@ -9,4 +9,6 @@ target 'LiveContextiOS' do
     
     pod 'SCRecorder'
     pod 'LFLiveKit'
+    pod 'SwiftyJSON'
+
 end

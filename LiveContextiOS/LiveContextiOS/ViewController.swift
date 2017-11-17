@@ -12,6 +12,7 @@ import SCRecorder
 import FBSDKLoginKit
 import FBSDKCoreKit
 import LFLiveKit
+import SwiftyJSON
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, SFSpeechRecognizerDelegate, FBSDKLoginButtonDelegate, LFLiveSessionDelegate {
     
@@ -26,6 +27,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var detectedTxt: UILabel!
     @IBOutlet var previewView: UIView!
     @IBOutlet weak var playView: UIView!
+    
+    var searchQuery = ""
     
     var articleTitles = ["This is happening in some place, here is some sample text.",
                          "This is happening in some place, here is some sample text.",
@@ -537,6 +540,16 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     
                     isRecording = false
                     
+                    //                print("Search query before: \(self.searchQuery)")
+                    googleNLPRequest(self.detectedTxt.text!)
+                    let delayTime = DispatchTime.now() + 3
+                    DispatchQueue.main.asyncAfter(deadline: delayTime, execute: {
+                        self.newsRequest(queryString: self.searchQuery)
+                        print("Search query after delay: \(self.searchQuery)")
+                    })
+                    //                print("Search query after: \(self.searchQuery)")
+                    newsRequest(queryString: self.searchQuery)
+                    
                     UIView.animate(withDuration: 0.4, animations: {
                         
                         self.goLiveBack.updateConstraintsIfNeeded()
@@ -588,6 +601,119 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             firstTap = false
         }
+    }
+    
+    let googleAPIKey = "AIzaSyDRpmhV-a_RTAEqFXBrasTc-rOe_EIY4ik"
+    
+    func googleNLPRequest(_ text: String) -> Void {
+        //        var searchQuery = ""
+        
+        let parameters: [String:Any] = //["content": , "type": "PLAIN_TEXT"]
+            [
+                "document": [
+                    "type": "PLAIN_TEXT",
+                    "content": text],
+                "encodingType": "UTF8"
+        ]
+        guard let url = URL(string: "https://language.googleapis.com/v1/documents:analyzeEntities?key=\(googleAPIKey)") else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        request.httpBody = httpBody
+        
+        let session = URLSession.shared
+        //        var temp = self.searchQuery
+        session.dataTask(with: request) { (data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = JSON(data) //try JSONSerialization.jsonObject(with: data, options: [])
+                    let entityNames =  json["entities"].arrayValue.map({$0["name"].stringValue})
+                    //                    let entityTypes =  json["entities"].arrayValue.map({$0["type"].stringValue})
+                    print(entityNames)
+                    //                    print(entityTypes)
+                    for entity in entityNames {
+                        //                        if self.searchTypes.contains(entity) {
+                        //                            if !self.searchQuery.isEmpty {
+                        //                                self.searchQuery.append(" AND ")
+                        //                            }
+                        //                            self.searchQuery.append(entityNames[eCount])
+                        //                        }
+                        if !self.searchQuery.isEmpty {
+                            self.searchQuery.append(" AND ")
+                        }
+                        self.searchQuery.append(entity)
+                        //                        if eCount > 5 {
+                        //
+                        //                        }
+                        //                        eCount += 1
+                    }
+                    //                    self.searchQuery = String(self.searchQuery.characters.map {
+                    //                        $0 == " " ? "%20" : $0
+                    //                    })
+                    self.searchQuery = self.searchQuery.replacingOccurrences(of: " ", with: "%20")
+                    
+                    
+                    
+                    //                    print(newsURL)
+                    print(self.searchQuery)
+                    //                    return(searchQuery)
+                    //                    temp = .searchQuery
+                }
+                //                } catch {
+                //                    print(error)
+                //                }
+            }
+            }.resume()
+        //        print("Final Return: \(searchQuery)")
+        //        print("Final Return2: \(temp)")
+        //        return searchQuery
+    }
+    
+    let newsAPIKey = "115ae73a193e41749bb267ba7cdbc1a7"
+    
+    func newsRequest(queryString: String) -> Void {
+        
+        //        print("news request search query: ")
+        //        print(self.searchQuery)
+        
+        //        let encodeString = queryString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        //        print("Encoded String: \(encodeString!)")
+        //        let sources = "abc-news,cnn,fox-news,the-guardian-uk,nbc-news,the-new-york-times,usa-today,the-wall-street-journal,the-washington-post,buzzfeed,google-news"
+        
+        guard let newsURL = URL(string: "https://newsapi.org/v2/everything?apiKey=\(newsAPIKey)&q=\(queryString)&language=en&sortBy=relevance") else {return}
+        
+        let session = URLSession.shared
+        session.dataTask(with: newsURL) { (data, response, error) in
+            if let response = response {
+                print(response)
+            }
+            if let data = data {
+                do {
+                    let json = JSON(data)//try JSONSerialization.jsonObject(with: data, options: [])
+                    //                    print(json)
+                    self.articleTitles = json["articles"].arrayValue.map({$0["title"].stringValue})
+                    self.articleDescriptions = json["articles"].arrayValue.map({$0["description"].stringValue})
+                    self.articleImageNames =  json["articles"].arrayValue.map({$0["urlToImage"].stringValue})
+                    
+                    self.addArticle(title: self.articleTitles[0], description: self.articleDescriptions[0], imgName: self.articleImageNames[0])
+                    
+                    print(self.articleTitles)
+                    print(self.articleDescriptions)
+                    print(self.articleImageNames)
+                    //                    for article in articles {
+                    //                        self.articleTitles.append(articl)
+                    //                    }
+                }
+                //                } catch {
+                //                    print(error)
+                //                }
+            }
+            }.resume()
+        
     }
     
     func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
