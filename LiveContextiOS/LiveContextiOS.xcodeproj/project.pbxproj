@@ -60,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1C550E54DC647763DDB547F /* Pods_LiveContextiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +88,8 @@
 				20E1779E1FBE3CAF009FD129 /* LiveContextiOSTests */,
 				20E177A91FBE3CAF009FD129 /* LiveContextiOSUITests */,
 				20E177881FBE3CAF009FD129 /* Products */,
+				354A72AE4B92AA79927474B5 /* Pods */,
+				E85DEC760609A6EB3B909EBE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -134,6 +137,23 @@
 			path = LiveContextiOSUITests;
 			sourceTree = "<group>";
 		};
+		354A72AE4B92AA79927474B5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7C59CDCD1015DA42F7ACBCDA /* Pods-LiveContextiOS.debug.xcconfig */,
+				7D9062EC87D69BE97DFC8816 /* Pods-LiveContextiOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E85DEC760609A6EB3B909EBE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C439C4BCC4738A083AD98C76 /* Pods_LiveContextiOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -141,9 +161,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 20E177AF1FBE3CAF009FD129 /* Build configuration list for PBXNativeTarget "LiveContextiOS" */;
 			buildPhases = (
+				C25FB554D7FF01A72309D928 /* [CP] Check Pods Manifest.lock */,
 				20E177831FBE3CAF009FD129 /* Sources */,
 				20E177841FBE3CAF009FD129 /* Frameworks */,
 				20E177851FBE3CAF009FD129 /* Resources */,
+				CA223474E763640CA4380697 /* [CP] Embed Pods Frameworks */,
+				1E9042190982D7A8EA06035E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -263,6 +286,66 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1E9042190982D7A8EA06035E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C25FB554D7FF01A72309D928 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LiveContextiOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CA223474E763640CA4380697 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LiveContextiOS/Pods-LiveContextiOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		20E177831FBE3CAF009FD129 /* Sources */ = {
@@ -435,6 +518,7 @@
 		};
 		20E177B01FBE3CAF009FD129 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7C59CDCD1015DA42F7ACBCDA /* Pods-LiveContextiOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -451,6 +535,7 @@
 		};
 		20E177B11FBE3CAF009FD129 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D9062EC87D69BE97DFC8816 /* Pods-LiveContextiOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
