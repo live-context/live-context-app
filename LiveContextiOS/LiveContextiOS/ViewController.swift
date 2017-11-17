@@ -23,7 +23,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet var previewView: UIView!
     @IBOutlet weak var playView: UIView!
     
-    var numArticles = 4
+    var numArticles = 0
+    var articleTitles = ["This is happening in some place, here is some sample text.",
+                         "This is happening in some place, here is some sample text.",
+                         "This is happening in some place, here is some sample text.",
+                         "This is happening in some place, here is some sample text."]
+    var articleDescriptions = ["This is the description of the news.",
+                         "This is the description of the news.",
+                         "This is the description of the news.",
+                         "This is the description of the news."]
+    var articleImageNames = ["img",
+                               "img",
+                               "img",
+                               "img"]
+    
     var selectedNewsIndex = 0
     var currentNewsIndex = 0
     var firstTap = true
@@ -56,6 +69,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        numArticles = articleTitles.count
+        
         newsCollectionView.delegate = self
         newsCollectionView.dataSource = self
         goLiveBack.layer.cornerRadius = 6
@@ -79,6 +94,15 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         recorder.device = AVCaptureDevice.Position.front
         recorder.videoConfiguration.size = CGSize(width: view.frame.size.width, height: view.frame.size.height)
         recorder.delegate = self
+        
+        // DEMO ADDING A CELL
+        let when = DispatchTime.now() + 5
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            // Your code with delay
+            
+            self.addArticle()
+            
+        }
 
     }
     
@@ -123,9 +147,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.btnBack.layer.masksToBounds = true
         
         // SAMPLE VALUES
-        cell.title.text = "This is happening in some place, here is some sample text."
-        cell.descrip.text = "This is the description of the news."
-        cell.image.image = UIImage(named: "img")
+        cell.title.text = articleTitles[indexPath.row]
+        cell.descrip.text = articleDescriptions[indexPath.row]
+        cell.image.image = UIImage(named: articleImageNames[indexPath.row])
         
         return cell
         
@@ -133,13 +157,13 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        selectedNewsIndex = indexPath[1]
+        selectedNewsIndex = indexPath.row
         
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        currentNewsIndex = indexPath[1]
+        currentNewsIndex = indexPath.row
         
     }
     
@@ -157,6 +181,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 newsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             }
         }
+    }
+    
+    func addArticle() {
+        
+        articleImageNames.append("img")
+        articleTitles.append("New Title")
+        articleDescriptions.append("New Description")
+        
+        let indexPath = IndexPath(row: articleImageNames.count, section: 0)
+        
+        newsCollectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition.left, animated: true)
+
     }
     
     func recordAndRecognizeSpeech() {
