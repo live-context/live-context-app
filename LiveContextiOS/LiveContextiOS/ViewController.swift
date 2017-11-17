@@ -462,19 +462,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
         return CGRect(x: x, y: y, width: width, height: height)
     }
-    
-    func updateNews(everySeconds: Int){
-        
-        if self.newsUpdate{
-            let delayTime = DispatchTime.now() + everySeconds
-                DispatchQueue.main.asyncAfter(deadline: delayTime, execute: {
-                    self.newsRequest(queryString: self.searchQuery)
-                    print("Search query after delay: \(self.searchQuery)")
-                    
-                    self.updateNews(everySeconds)
-                })
-        }
-    }
 
     @IBAction func goLiveBtnPressed(_ sender: Any) {
 
@@ -530,13 +517,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     
                 }, completion: nil)
                 
-                self.newsUpdate = true
-                self.updateNews(everySeconds: 10)
-                
             } else {
                 
                 //recorder.pause()
-                self.newsUpdate = false
                 
                 if audioEngine.isRunning {
                     
@@ -595,9 +578,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     } catch {
                         return print(error)
                     }
-                    
-                    self.newsUpdate = true
-                    self.updateNews(everySeconds: 10)
                     
                     UIView.animate(withDuration: 0.4, animations: {
                         
