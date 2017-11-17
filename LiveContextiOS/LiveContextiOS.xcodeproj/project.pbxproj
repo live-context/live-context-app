@@ -14,6 +14,9 @@
 		20E177951FBE3CAF009FD129 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20E177931FBE3CAF009FD129 /* LaunchScreen.storyboard */; };
 		20E177A01FBE3CAF009FD129 /* LiveContextiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E1779F1FBE3CAF009FD129 /* LiveContextiOSTests.swift */; };
 		20E177AB1FBE3CAF009FD129 /* LiveContextiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E177AA1FBE3CAF009FD129 /* LiveContextiOSUITests.swift */; };
+		20E177B91FBE517A009FD129 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E177B81FBE517A009FD129 /* NewsCell.swift */; };
+		20E177BB1FBE54AB009FD129 /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20E177BA1FBE54AB009FD129 /* Poppins-Medium.ttf */; };
+		20E177BD1FBE566C009FD129 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20E177BC1FBE566C009FD129 /* Poppins-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		20E177A61FBE3CAF009FD129 /* LiveContextiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LiveContextiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20E177AA1FBE3CAF009FD129 /* LiveContextiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveContextiOSUITests.swift; sourceTree = "<group>"; };
 		20E177AC1FBE3CAF009FD129 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20E177B81FBE517A009FD129 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		20E177BA1FBE54AB009FD129 /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		20E177BC1FBE566C009FD129 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,8 +107,11 @@
 				20E1778C1FBE3CAF009FD129 /* ViewController.swift */,
 				20E1778E1FBE3CAF009FD129 /* Main.storyboard */,
 				20E177911FBE3CAF009FD129 /* Assets.xcassets */,
+				20E177BA1FBE54AB009FD129 /* Poppins-Medium.ttf */,
+				20E177BC1FBE566C009FD129 /* Poppins-Regular.ttf */,
 				20E177931FBE3CAF009FD129 /* LaunchScreen.storyboard */,
 				20E177961FBE3CAF009FD129 /* Info.plist */,
+				20E177B81FBE517A009FD129 /* NewsCell.swift */,
 			);
 			path = LiveContextiOS;
 			sourceTree = "<group>";
@@ -232,8 +241,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				20E177951FBE3CAF009FD129 /* LaunchScreen.storyboard in Resources */,
+				20E177BB1FBE54AB009FD129 /* Poppins-Medium.ttf in Resources */,
 				20E177921FBE3CAF009FD129 /* Assets.xcassets in Resources */,
 				20E177901FBE3CAF009FD129 /* Main.storyboard in Resources */,
+				20E177BD1FBE566C009FD129 /* Poppins-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20E1778D1FBE3CAF009FD129 /* ViewController.swift in Sources */,
+				20E177B91FBE517A009FD129 /* NewsCell.swift in Sources */,
 				20E1778B1FBE3CAF009FD129 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,6 +440,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DGU6V4MRZ4;
 				INFOPLIST_FILE = LiveContextiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pablogarces.LiveContextiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -443,6 +456,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = DGU6V4MRZ4;
 				INFOPLIST_FILE = LiveContextiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.pablogarces.LiveContextiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
