@@ -45,6 +45,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var isRecording = false
     var recordedText = ""
     var tempTxt = ""
+    var currentlySelectedImg: UIImageView = UIImageView()
+    let imglayer = CALayer()
     
     lazy var indicator: UIPageControl = {
         let pc = UIPageControl()
@@ -117,6 +119,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let playerLayer = AVPlayerLayer(player: player)
         let bounds = playView.bounds
         playerLayer.frame = bounds
+        playerLayer.addSublayer(imglayer)
         playView.layer.addSublayer(playerLayer)
         
     }
@@ -163,7 +166,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         selectedNewsIndex = indexPath.row
-        screenShotView()
+        currentlySelectedImg.image = screenShotView(index: indexPath)
 
         print(selectedNewsIndex)
         
@@ -175,16 +178,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     
-    func screenShotView() {
+    func screenShotView(index: IndexPath) -> UIImage {
         
-        //Create the UIImage
+        // Create the UIImage
         UIGraphicsBeginImageContext(newsCollectionView.frame.size)
-        newsCollectionView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        newsCollectionView.cellForItem(at: index)?.contentView.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        //Save it to the camera roll
+        // Save it to the camera roll
         UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+        
+        imglayer.contents = currentlySelectedImg.image?.cgImage
+        imglayer.frame = CGRectMake(0, 0, 100, 100)
+        imglayer.opacity = 0.6
+        
+        return image!
+        
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -352,6 +362,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                     self.livePrivacyControl.isUserInteractionEnabled = false
                 }
                 recorder.record()
+                recorder.scImageView?.ciImage = currentlySelectedImg.image?.ciImage
                 
                 recordAndRecognizeSpeech()
                 isRecording = true
@@ -384,7 +395,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                         
                     }, completion: nil)
                     
+                    //playView.addSubview(currentlySelectedImg)
                     player.play()
+                    
                     
                     // Save to camera roll
                     //                session.mergeSegments(usingPreset: AVAssetExportPresetHighestQuality) { (url, error) in
@@ -401,6 +414,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 } else {
                     
                     recorder.record()
+                    recorder.scImageView?.ciImage = currentlySelectedImg.image?.ciImage
                     
                     isRecording = true
                     
