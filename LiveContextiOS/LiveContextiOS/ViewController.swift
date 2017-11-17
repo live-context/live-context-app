@@ -9,8 +9,10 @@ import UIKit
 import Speech
 import AVFoundation
 import SCRecorder
+import FBSDKLoginKit
+import FBSDKCoreKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, SFSpeechRecognizerDelegate {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, SFSpeechRecognizerDelegat, FBSDKLoginButtonDelegate {
 
     @IBOutlet weak var goLiveBack: UIView!
     @IBOutlet weak var newsCollectionView: UICollectionView!
@@ -313,19 +315,25 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             let image = UIImage(named: "img")
             recorder.scImageView?.setImageBy(image)
             
-            if audioEngine.isRunning {
+            FBSDKLoginManager().logIn(withReadPermissions: ["email", "public_profile","publish_actions"], from: self) { (result, err) in
+                if err != nil {
+                    print("Login failed")
+                }
+                print("Login successful")
+            }
+        }
+        else{
+            if firstTap {
                 
-                recordedText = "\(tempTxt)"
-                self.detectedTxt.text = self.recordedText
-                
-                audioEngine.stop()
-                
-                isRecording = false
+                recorder.record()
+
+                recordAndRecognizeSpeech()
+                isRecording = true
                 
                 UIView.animate(withDuration: 0.4, animations: {
                     
                     self.goLiveBack.updateConstraintsIfNeeded()
-                    self.goLiveLbl.text = "Go Live"
+                    self.goLiveLbl.text = "Stop Recording"
                     
                 }, completion: nil)
                 
@@ -349,28 +357,63 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 
             } else {
                 
-                recorder.record()
+                recorder.pause()
                 
-                isRecording = true
-                
-                do {
-                    try audioEngine.start()
-                } catch {
-                    return print(error)
+                if audioEngine.isRunning {
+                    
+                    recordedText = "\(tempTxt)"
+                    self.detectedTxt.text = self.recordedText
+                    
+                    audioEngine.stop()
+                    
+                    isRecording = false
+                    
+                    UIView.animate(withDuration: 0.4, animations: {
+                        
+                        self.goLiveBack.updateConstraintsIfNeeded()
+                        self.goLiveLbl.text = "Go Live"
+                        
+                    }, completion: nil)
+                    
+                    // Preview Video
+                    // player.play()
+                    
+                    // Save to camera roll
+    //                session.mergeSegments(usingPreset: AVAssetExportPresetHighestQuality) { (url, error) in
+    //                    if (error == nil) {
+    //                        url?.saveToCameraRollWithCompletion({ (path, error) in
+    //                            debugPrint(path, error)
+    //                        })
+    //                    } else {
+    //                        debugPrint(error as Any)
+    //                    }
+    //                }
+                    
+                    
+                } else {
+                    
+                    recorder.record()
+                    
+                    isRecording = true
+                    
+                    do {
+                        try audioEngine.start()
+                    } catch {
+                        return print(error)
+                    }
+                    
+                    UIView.animate(withDuration: 0.4, animations: {
+                        
+                        self.goLiveBack.updateConstraintsIfNeeded()
+                        self.goLiveLbl.text = "Stop Recording"
+                        
+                    }, completion: nil)
                 }
                 
-                UIView.animate(withDuration: 0.4, animations: {
-                    
-                    self.goLiveBack.updateConstraintsIfNeeded()
-                    self.goLiveLbl.text = "Stop Recording"
-                    
-                }, completion: nil)
             }
             
-        }
-        
-        firstTap = false
-    
+            firstTap = false
+            }
     }
     
 }
