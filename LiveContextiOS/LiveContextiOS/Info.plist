@@ -2,15 +2,30 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>For Speech Recognition</string>
-	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>For Speech Recognition</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Regular.ttf</string>
 		<string>Poppins-Medium.ttf</string>
 	</array>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Speech to Text</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Facebook Live Stream</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Facebook Live Stream</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1476001749162819</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>1476001749162819</string>
+	<key>FacebookDisplayName</key>
+	<string>LiveContext</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -27,6 +42,13 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -50,4 +72,3 @@
 	</array>
 </dict>
 </plist>
-
